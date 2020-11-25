@@ -1,3 +1,3 @@
 function nextPage(){
-    window.location.replace("./game.html");
+    window.location.href("./game.html");
 }
