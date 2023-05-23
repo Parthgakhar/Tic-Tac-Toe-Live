@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+            <script>
+            (function() {
+                window._vwo_evq = window._vwo_evq || [];
+                var _vwoOldPush = window._vwo_evq.push;
+                window._vwo_evq.push = function() {
+                    var eventData = arguments[0], willRedirectionOccur;
+                    if (eventData[0] === 'rD') {
+                        willRedirectionOccur = eventData[1];
+                        // It will be set to true if a redirection is going to be done by VWO.
+
+                        window.willRedirectionOccurByVWO = willRedirectionOccur;
+                    }
+                    _vwoOldPush.apply(window._vwo_evq, [].slice.call(arguments));
+                }
+                ;
+            }
+            )();
+        </script>
     <script referrerPolicy="no-referrer-when-downgrade" src="https://dev.visualwebsiteoptimizer.com/lib/538298.js" id='vwoCode'></script>
+       <script>
+            console.log("window.willRedirectionOccurByVWO", window.willRedirectionOccurByVWO);
+            if (!window.willRedirectionOccurByVWO) {
+                console.log("EXECUTE GA CODE HERE");
+            } else {
+                console.log("WO is redirecting this page.");
+            }
+        </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
