@@ -17,7 +17,7 @@
             };
             var hardLimitTimedout = false;
             function tryNonVWOTracking(nonVWOScriptsToExecute) {
-                if (window.VWO._.libExecuted || hardLimitTimedout) {
+                if ((window.VWO && window.VWO.libExecuted) || hardLimitTimedout) {
                     if (!window.willRedirectionOccurByVWO) {
                         clearTimeout(hardLimitTimer);
                         for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
