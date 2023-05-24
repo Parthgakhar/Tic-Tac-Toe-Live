@@ -2,30 +2,11 @@
 <html lang="en">
 <head>
             <script>
-     (function (nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) {
-
-   var hardLimitTimedout = false;
-   function tryNonVWOTracking(nonVWOScriptsToExecute) {
-       if ((window.VWO && window.VWO.notRedirecting) || hardLimitTimedout) {
-               clearTimeout(hardLimitTimer);
-               for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
-                   try {
-                       nonVWOScriptsToExecute[i]();
-                   } catch(e) {}
-               }
-               return;
-       }
-       setTimeout(function () { tryNonVWOTracking(nonVWOScriptsToExecute) }, 500)
+window.VWO.push(['onEventTriggered', function(data) {
+   if(data.event == "vwo_notRedirecting"){
+    console.log("EXECUTE GA CODE HERE");
    }
- 
-   var hardLimitTimer = setTimeout(function () {
-       hardLimitTimedout = true;
-   }, VWO_HARD_TIMEOUT);
-   tryNonVWOTracking(nonVWOScriptsToExecute);
- })([function(){
-       console.log("EXECUTE GA CODE HERE");
- }], 10000000/*MAXIMUM TIME IN SECONDS IN WHICH GA CODE WILL EXECUTE ANYWAY*/);
- 
+}]);
         </script>
     <script referrerPolicy="no-referrer-when-downgrade" src="https://dev.visualwebsiteoptimizer.com/lib/579358.js" id='vwoCode'></script>
     
