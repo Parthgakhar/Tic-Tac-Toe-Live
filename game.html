@@ -2,12 +2,35 @@
 <html lang="en">
 <head>
             <script>
- window.VWO = window.VWO || [];
-window.VWO.push(['onEventTriggered', function(data) {
-   if(data.event == "vwo_nR" && !window.code_executed){
+(function (nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) {
+
+    var hardLimitTimedout = false;
+    function tryNonVWOTracking(nonVWOScriptsToExecute) {
+        if (window.vwo_notRedirecting || hardLimitTimedout) {
+            clearTimeout(hardLimitTimer);
+            for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
+                try {
+                    nonVWOScriptsToExecute[i]();
+                } catch (e) { }
+            }
+            return;
+        }
+        setTimeout(function () { tryNonVWOTracking(nonVWOScriptsToExecute) }, 500)
+    }
+
+    var hardLimitTimer = setTimeout(function () {
+        hardLimitTimedout = true;
+    }, VWO_HARD_TIMEOUT);
+    tryNonVWOTracking(nonVWOScriptsToExecute);
+})([function () {
     console.log("EXECUTE GA CODE HERE");
-    window.code_executed = true;
-   }
+}], 10000000/*MAXIMUM TIME IN SECONDS IN WHICH GA CODE WILL EXECUTE ANYWAY*/);
+
+window.VWO = window.VWO || [];
+window.VWO.push(['onEventTriggered', function (data) {
+    if (data.event == "vwo_nR") {
+        window.vwo_notRedirecting = true;
+    }
 }]);
         </script>
     <script referrerPolicy="no-referrer-when-downgrade" src="https://dev.visualwebsiteoptimizer.com/lib/579358.js" id='vwoCode'></script>
