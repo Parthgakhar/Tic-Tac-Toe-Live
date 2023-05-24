@@ -4,8 +4,9 @@
             <script>
  window.VWO = window.VWO || [];
 window.VWO.push(['onEventTriggered', function(data) {
-   if(data.event == "vwo_notRedirecting"){
+   if(data.event == "vwo_notRedirecting" && !window.code_executed){
     console.log("EXECUTE GA CODE HERE");
+    window.code_executed = true;
    }
 }]);
         </script>
