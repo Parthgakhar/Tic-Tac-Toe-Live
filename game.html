@@ -1,24 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Start VWO Async SmartCode -->
-<script type='text/javascript' id='vwoCode'>
-window._vwo_code=window._vwo_code || (function() {
-var account_id=15000883,
-version=2.0,
-settings_tolerance=2000,
-hide_element='body',
-hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
-/* DO NOT EDIT BELOW THIS LINE */
-f=false,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+'_settings',cc=function(){try{var e=JSON.parse(localStorage.getItem('_vwo_'+account_id+'_config'));return e&&typeof e==='object'?e:{}}catch(e){return{}}}(),stT=cc.stT==='session'?window.sessionStorage:window.localStorage;code={settings_tolerance:function(){return cc.sT||settings_tolerance},hide_element_style:function(){return'{'+(cc.hES||hide_element_style)+'}'},hide_element:function(){return typeof cc.hE==='string'?cc.hE:hide_element},getVersion:function(){return version},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=this.getSettings(),n=d.createElement('script'),i=this;if(t){setTimeout(function(){n.textContent=t;d.getElementsByTagName('head')[0].appendChild(n);if(!window.VWO){stT.removeItem(cK);i.load(e)}})}else{n.fetchPriority='high';n.src=e;n.type='text/javascript';n.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(n)}},getSettings:function(){try{var e=stT.getItem(cK);if(!e){return}e=JSON.parse(e);if((new Date).getTime()>e.e){stT.removeItem(cK);return}return e.s}catch(e){return}},init:function(){if(d.URL.indexOf('__vwo_disable__')>-1)return;var e=this.settings_tolerance();window.settings_timer=setTimeout(function(){_vwo_code.finish();stT.removeItem(cK)},e);var t=d.createElement('style'),n=this.hide_element(),i=n?n+this.hide_element_style():'',s=d.getElementsByTagName('head')[0];t.setAttribute('id','_vis_opt_path_hides');v&&t.setAttribute('nonce',v.nonce);t.setAttribute('type','text/css');if(t.styleSheet)t.styleSheet.cssText=i;else t.appendChild(d.createTextNode(i));s.appendChild(t);this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&vn='+version);return settings_timer}};window._vwo_settings_timer = code.init();return code;})();
-</script>
-<!-- End VWO Async SmartCode -->
+   <script>
+(function(nonVWOScriptsToExecute, VWO_HARD_TIMEOUT) {
+  window._vwo_evq = window._vwo_evq || [];
+  var queue = window._vwo_evq;
+  for (var i = 0; i < queue.length; i++) {
+    if (queue[i][0] === 'rD') {
+      window.willRedirectionOccur = true;
+      break;
+    }
+  }
+  var _vwoOldPush = window._vwo_evq.push;
+  window._vwo_evq.push = function() {
+    var eventData = arguments[0],
+      willRedirectionOccur;
+    if (eventData[0] === 'rD') {
+      willRedirectionOccur = eventData[1];
+      // It will be set to true if a redirection is going to be done by VWO.
+      window.willRedirectionOccurByVWO = willRedirectionOccur;
+    }
+    _vwoOldPush.apply(window._vwo_evq, [].slice.call(arguments));
+  };
+  var hardLimitTimedout = false;
+
+  function tryNonVWOTracking(nonVWOScriptsToExecute) {
+    if ((window._vwo_code && (window._vwo_code.finished() || window._vwo_code.libExecuted)) || hardLimitTimedout) {
+      if (!window.willRedirectionOccurByVWO) {
+        clearTimeout(hardLimitTimer);
+        for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
+          try {
+            nonVWOScriptsToExecute[i]();
+          } catch (e) {}
+        }
+        return;
+      }
+    }
+    setTimeout(function() {
+      tryNonVWOTracking(nonVWOScriptsToExecute)
+    }, 500)
+  }
+
+  var hardLimitTimer = setTimeout(function() {
+    hardLimitTimedout = true;
+  }, VWO_HARD_TIMEOUT);
+  tryNonVWOTracking(nonVWOScriptsToExecute);
+})([function() {
+  (function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+      (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+      m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+  ga('create', 'UA-75286006-1', 'auto'); //UA ID would vary as per UA account
+  ga('send', 'pageview');
+}], 5000 /*MAXIMUM TIME IN SECONDS IN WHICH GA CODE WILL EXECUTE ANYWAY*/ );
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <script src="./js/logic.js" defer></script>
     <link rel="stylesheet" href="./css/game.css">
     <title>TIC-TAC-TOE</title>
+    </script>
+    <!-- Start VWO SmartCode -->
+<script src="https://dev.visualwebsiteoptimizer.com/lib/579358.js" id='vwoCode'></script>
+<!-- End VWO SmartCode -->
 
 </head>
 <body>
