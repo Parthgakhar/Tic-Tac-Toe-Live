@@ -25,7 +25,7 @@
   var hardLimitTimedout = false;
 
   function tryNonVWOTracking(nonVWOScriptsToExecute) {
-    if ((window._vwo_code && window._vwo_code.finished())|| window.libFinished || hardLimitTimedout) {
+    if ((window._vwo_code && window._vwo_code.finished())|| window.vwo_libExecuted || hardLimitTimedout) {
       if (!window.willRedirectionOccurByVWO) {
         clearTimeout(hardLimitTimer);
         for (var i = 0; i < nonVWOScriptsToExecute.length; i++) {
