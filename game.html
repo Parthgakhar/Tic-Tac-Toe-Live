@@ -1,44 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-   (function() {
-  window._vwo_evq = window._vwo_evq || [];
-  var _vwoOldPush = window._vwo_evq.push;
-  window._vwo_evq.push = function() {
-    var eventData = arguments[0],
-      willRedirectionOccur;
-    if (eventData[0] === 'rD') {
-      willRedirectionOccur = eventData[1]; // It will be set to true if a redirection is going to be done by VWO.
-
-      window.willRedirectionOccurByVWO = willRedirectionOccur;
-    }
-    _vwoOldPush.apply(window._vwo_evq, [].slice.call(arguments));
-  };
-})();
+   <script>
+/* eslint-disable no-undef */
+window._vwo_code =  (function() {
+    var account_id = 15000883, // replace 1 with ${accountId} in release string
+        version = 1.5,
+        settings_tolerance = 2000,
+        library_tolerance = 2500,
+        use_existing_jquery = false,
+        is_spa = 1,
+        hide_element = 'body',
+        hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+        /* DO NOT EDIT BELOW THIS LINE */
+        f = false,
+        d = document,
+        vwoCodeEl = d.querySelector('#vwoCode'),
+        code = {
+            use_existing_jquery: function() {
+                return use_existing_jquery;
+            },
+            library_tolerance: function() {
+                return library_tolerance;
+            },
+            hide_element_style: function() {
+                return '{' + hide_element_style + '}';
+            },
+            finish: function() {
+                if (!f) {
+                    f = true;
+                    var a = d.getElementById('_vis_opt_path_hides');
+                    if (a) a.parentNode.removeChild(a);
+                }
+            },
+            finished: function() {
+                return f;
+            },
+            load: function(a) {
+                var b = d.createElement('script');
+                b.fetchPriority = 'high';
+                b.src = a;
+                b.type = 'text/javascript';
+                b.onerror = function() {
+                    _vwo_code.finish();
+                };
+                d.getElementsByTagName('head')[0].appendChild(b);
+            },
+            getVersion: function() {
+                return version;
+            },
+            /**
+                @returns the array of matched cookies based on the regex
+             */
+            getMatchedCookies: function (matchPattern) {
+                var matchedCookies = [];
+                if(document.cookie) {
+                    matchedCookies = document.cookie.match(matchPattern) || [];
+                }
+                return matchedCookies;
+            },
+            /**
+             * @returns the desired value based on combination cookie
+             */
+            getCombinationCookie: function () {
+                var matchedCookies = code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);
+                matchedCookies = matchedCookies.map(function(cookie) {
+                    try {
+                        var decodedCookie = decodeURIComponent(cookie);
+                        if (!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(decodedCookie)) {
+                            return '';
+                        }
+                        return decodedCookie;
+                    } catch(e) {
+                        return '';
+                    }
+                });
+                var combinations = [];
+                matchedCookies.forEach(function(each) {
+                    var cookiePair = each.match(/([\d,]+)/g);
+                    cookiePair && combinations.push(cookiePair.join("-"));
+                });
+                return combinations.join("|");
+            },
+            init: function() {
+                if (d.URL.indexOf("__vwo_disable__") > -1) return;
+                window.settings_timer = setTimeout(function() {
+                    _vwo_code.finish()
+                }, settings_tolerance);
+                var a = d.createElement('style'),
+                    b = hide_element ? hide_element + '{' + hide_element_style + '}' : '',
+                    h = d.getElementsByTagName('head')[0];
+                a.setAttribute('id', '_vis_opt_path_hides');
+                vwoCodeEl && a.setAttribute('nonce', vwoCodeEl.nonce);
+                a.setAttribute('type', 'text/css');
+                if (a.styleSheet) a.styleSheet.cssText = b;
+                else a.appendChild(d.createTextNode(b));
+                h.appendChild(a);
+                var c = this.getCombinationCookie();
+                this.load('https://dev.visualwebsiteoptimizer.com/j.php?a=' + account_id + '&u=' + encodeURIComponent(d.URL) + '&f=' + (+is_spa) + '&vn=' + version + (c ? ('&c=' + c) : ''));
+                return settings_timer;
+            }
+        };
+    window._vwo_settings_timer = code.init();
+    return code;
+}());
    </script>
+   <script>
+/* eslint-disable no-undef */
+window._vwo_code = window._vwo_code || (function() {
+    var account_id = 1, // replace 1 with ${accountId} in release string
+        version = 15000883,
+        settings_tolerance = 2000,
+        library_tolerance = 2500,
+        use_existing_jquery = false,
+        is_spa = 1,
+        hide_element = 'body',
+        hide_element_style = 'opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important',
+        /* DO NOT EDIT BELOW THIS LINE */
+        f = false,
+        d = document,
+        vwoCodeEl = d.querySelector('#vwoCode'),
+        code = {
+            use_existing_jquery: function() {
+                return use_existing_jquery;
+            },
+            library_tolerance: function() {
+                return library_tolerance;
+            },
+            hide_element_style: function() {
+                return '{' + hide_element_style + '}';
+            },
+            finish: function() {
+                if (!f) {
+                    f = true;
+                    var a = d.getElementById('_vis_opt_path_hides');
+                    if (a) a.parentNode.removeChild(a);
+                }
+            },
+            finished: function() {
+                return f;
+            },
+            load: function(a) {
+                var b = d.createElement('script');
+                b.fetchPriority = 'high';
+                b.src = a;
+                b.type = 'text/javascript';
+                b.onerror = function() {
+                    _vwo_code.finish();
+                };
+                d.getElementsByTagName('head')[0].appendChild(b);
+            },
+            getVersion: function() {
+                return version;
+            },
+            /**
+                @returns the array of matched cookies based on the regex
+             */
+            getMatchedCookies: function (matchPattern) {
+                var matchedCookies = [];
+                if(document.cookie) {
+                    matchedCookies = document.cookie.match(matchPattern) || [];
+                }
+                return matchedCookies;
+            },
+            /**
+             * @returns the desired value based on combination cookie
+             */
+            getCombinationCookie: function () {
+                var matchedCookies = code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);
+                matchedCookies = matchedCookies.map(function(cookie) {
+                    try {
+                        var decodedCookie = decodeURIComponent(cookie);
+                        if (!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(decodedCookie)) {
+                            return '';
+                        }
+                        return decodedCookie;
+                    } catch(e) {
+                        return '';
+                    }
+                });
+                var combinations = [];
+                matchedCookies.forEach(function(each) {
+                    var cookiePair = each.match(/([\d,]+)/g);
+                    cookiePair && combinations.push(cookiePair.join("-"));
+                });
+                return combinations.join("|");
+            },
+            init: function() {
+                if (d.URL.indexOf("__vwo_disable__") > -1) return;
+                window.settings_timer = setTimeout(function() {
+                    _vwo_code.finish()
+                }, settings_tolerance);
+                var a = d.createElement('style'),
+                    b = hide_element ? hide_element + '{' + hide_element_style + '}' : '',
+                    h = d.getElementsByTagName('head')[0];
+                a.setAttribute('id', '_vis_opt_path_hides');
+                vwoCodeEl && a.setAttribute('nonce', vwoCodeEl.nonce);
+                a.setAttribute('type', 'text/css');
+                if (a.styleSheet) a.styleSheet.cssText = b;
+                else a.appendChild(d.createTextNode(b));
+                h.appendChild(a);
+                var c = this.getCombinationCookie();
+                this.load('https://dev.visualwebsiteoptimizer.com/j.php?a=' + account_id + '&u=' + encodeURIComponent(d.URL) + '&f=' + (+is_spa) + '&vn=' + version + (c ? ('&c=' + c) : ''));
+                return settings_timer;
+            }
+        };
+    window._vwo_settings_timer = code.init();
+    return code;
+}());
+</script>
+   
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <script src="./js/logic.js" defer></script>
     <link rel="stylesheet" href="./css/game.css">
     <title>TIC-TAC-TOE</title>
-    </script>
-    <!-- Start VWO SmartCode -->
-<script src="https://dev.visualwebsiteoptimizer.com/lib/579358.js" id='vwoCode'></script>
-<!-- End VWO SmartCode -->
-   <script >
-  window.onbeforeunload = function() {
-    if (window.willRedirectionOccurByVWO) {
-       console.log(" No Exit popup.");
-      // No Exit popup.
-      return null;
-    } else {
-console.log(" Exit popup.");
-      // Move Existing exit popup code Here to show popup in case visitor remains on control.
-    }
-  };
-</script>
+  
 
 </head>
 <body>
